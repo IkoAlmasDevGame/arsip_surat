@@ -32,9 +32,23 @@
                     <div class="card-body mt-1">
                         <?php require_once("../auth/function.php"); ?>
                         <?php 
-                            # code ...
+                            require_once("../../../controller/controller.php");
+                            require_once("../../../model/karyawan.php");
+                            $authentication = new controller\Authentication($konfigs);
+                            if(!isset($_GET['aksi'])){
+                            }else{
+                                switch ($_GET['aksi']) {
+                                    case 'login':
+                                        $authentication->SignIn();
+                                        break;
+                                    
+                                    default:
+                                        require_once("../../../controller/controller.php");
+                                        break;
+                                }
+                            }
                         ?>
-                        <form action="" enctype="multipart/form-data" method="post">
+                        <form action="?aksi=login" enctype="multipart/form-data" method="post">
                             <div class="form-group">
                                 <div class="form-inline row justify-content-center
                                      align-items-center flex-wrap mb-1 mt-1">
