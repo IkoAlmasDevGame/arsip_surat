@@ -75,14 +75,14 @@ if($_SESSION['role'] == "superadmin"){
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" aria-current="page" href="">
+            <a class="nav-link collapsed" aria-current="page" href="?page=absensi">
                 <i class="fa fa-bookmark fa-1x"></i>
                 <span>Absensi</span>
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" aria-current="page" href="">
+            <a class="nav-link collapsed" aria-current="page" href="?page=keterangan">
                 <i class="fa fa-book fa-1x"></i>
                 <span>Keterangan</span>
             </a>
@@ -90,7 +90,7 @@ if($_SESSION['role'] == "superadmin"){
         <hr>
         <h5 class="fw-normal fst-normal fs-6">Profile & Pengaturan</h5>
         <li class="nav-item">
-            <a class="nav-link collapsed" aria-current="page" href=""
+            <a class="nav-link collapsed" aria-current="page" href="?aksi=ubah-karyawan&id=<?php echo $_SESSION['id']?>"
                 onclick="return confirm('Apakah anda ingin edit profile anda ?')">
                 <i class="fa fa-user-edit fa-1x"></i>
                 <span>Edit Profile</span>
@@ -98,8 +98,8 @@ if($_SESSION['role'] == "superadmin"){
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" aria-current="page" href=""
-                onclick="return confirm('Apakah anda ingin edit pengturan Perpustakaan ?')">
+            <a class="nav-link collapsed" aria-current="page" href="?page=settings"
+                onclick="return confirm('Apakah anda ingin edit pengturan Arsip Surat ?')">
                 <i class="fa fa-gears fa-1x"></i>
                 <span>Pengaturan</span>
             </a>
@@ -174,7 +174,95 @@ if($_SESSION['role'] == "superadmin"){
 
     </header>
     <!-- ======= Header ======= -->
-    <?php
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link collapsed" aria-current="page" href="?page=beranda">
+                    <i class="fa fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li><!-- End Blank Page Nav -->
+
+            <hr>
+            <h5 class="fw-normal fst-normal fs-6">Surat Masuk & Surat Keluar</h5>
+            <li class="nav-item">
+                <a class="nav-link collapsed" aria-current="page" href="">
+                    <i class="bi bi-mailbox2 fa-1x"></i>
+                    <span>Surat Masuk <?php # code count surat masuk ?></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" aria-current="page" href="">
+                    <i class="bi bi-mailbox fa-1x"></i>
+                    <span>Surat Keluar <?php # code count surat keluar ?></span>
+                </a>
+            </li>
+
+            <hr>
+            <h5 class="fw-normal fst-normal fs-6">Arsip Surat</h5>
+            <li class="nav-item">
+                <a class="nav-link collapsed" aria-current="page" href="">
+                    <i class="bi bi-mailbox-flag fa-1x"></i>
+                    <span>Arsip Surat</span>
+                </a>
+            </li>
+
+            <hr>
+            <h5 class="fw-normal fst-normal fs-6">Absensi & Keterangan</h5>
+            <li class="nav-item">
+                <a class="nav-link collapsed" aria-current="page" href="?aksi=absensi-karyawan">
+                    <i class="fa fa-bookmark fa-1x"></i>
+                    <span>Absensi</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" aria-current="page" href="?aksi=keterangan-karyawan">
+                    <i class="fa fa-book fa-1x"></i>
+                    <span>Keterangan</span>
+                </a>
+            </li>
+
+            <hr>
+            <h5 class="fw-normal fst-normal fs-6">Profile & Pengaturan</h5>
+            <li class="nav-item">
+                <a class="nav-link collapsed" aria-current="page"
+                    href="?aksi=ubah-karyawan&id=<?php echo $_SESSION['id']?>"
+                    onclick="return confirm('Apakah anda ingin edit profile anda ?')">
+                    <i class="fa fa-user-edit fa-1x"></i>
+                    <span>Edit Profile</span>
+                </a>
+            </li>
+
+            <hr>
+            <h5 class="fw-normal fst-normal fs-6">Keluar Website</h5>
+            <li class="nav-item">
+                <a class="nav-link collapsed" aria-current="page" href="?page=keluar"
+                    onclick="return confirm('Apakah anda ingin logout ?')">
+                    <i class="fa fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li><!-- End Blank Page Nav -->
+        </ul>
+    </aside><!-- End Sidebar-->
+    <!-- ======= Sidebar ======= -->
+
+    <main id="main" class="main">
+        <section class="section dashboard">
+            <div class="row">
+
+                <!-- Left side columns -->
+                <div class="col-lg-8">
+                    <div class="row">
+
+                    </div>
+
+                </div><!-- End Right side columns -->
+
+            </div>
+        </section>
+        <?php
 }else{
     echo "<script>document.location.href = '../../auth/index.php'</script>";
     exit;

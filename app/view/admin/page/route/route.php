@@ -6,7 +6,9 @@ $hasil = mysqli_fetch_array($konfigs->query("SELECT * FROM sistem WHERE status =
 require_once("../../../../model/karyawan.php");
 $karyawan = new model\karyawan($konfigs);
 require_once("../../../../model/absensi.php");
+$absensi = new model\absensi($konfigs);
 require_once("../../../../model/keterangan.php");
+$keterangan = new model\keterangan($konfigs);
 require_once("../../../../model/arsip_surat.php");
 require_once("../../../../model/pengaturan.php");
 require_once("../../../../model/pengguna.php");
@@ -15,6 +17,8 @@ require_once("../../../../model/surat_keluar.php");
 /* Files Controller */
 require_once("../../../../controller/controller.php");
 $AuthUser = new controller\Authentication($konfigs);
+$attedance = new controller\attedance($konfigs);
+$document = new controller\document($konfigs);
 
 // Action & Page 
 if(!isset($_GET['page'])){
@@ -27,6 +31,21 @@ if(!isset($_GET['page'])){
         case 'karyawan':
             $title = "Data Master Karyawan";
             require_once("../karyawan/karyawan.php");
+            break;
+
+        case 'absensi':
+            $title = "Data Master absensi";
+            require_once("../absensi/absensi.php");
+            break;
+            
+        case 'keterangan':
+            $title = "Data Master keterangan";
+            require_once("../keterangan/keterangan.php");
+            break;
+
+        case 'settings':
+            $title = "Data Master pengaturan";
+            require_once("../pengaturan/pengaturan.php");
             break;
 
         case 'keluar':
@@ -49,10 +68,32 @@ if(!isset($_GET['page'])){
 if(!isset($_GET['aksi'])){
 }else{
     switch ($_GET['aksi']) {  
+        # Master Absensi
+        case 'absensi-karyawan':
+            require_once("../absensi/tambah.php");
+            break;
+            case 'simpan-absensi':
+                $attedance->attdance();
+                break;
+        # Master Absensi
+
+        # Master Keterangan
+        case 'keterangan-karyawan':
+            require_once("../keterangan/tambah.php");
+            break;
+            case 'simpan-keterangan':
+                $document->buat_keterangan();
+                break;
+        # Master Keterangan
+        
         # Master Karyawan
         case 'daftar-karyawan':
             $title = "Pendaftaran Karyawan";
             require_once("../karyawan/tambah.php");
+            break;
+        case 'ubah-karyawan':
+            $title = "ubah Karyawan";
+            require_once("../pengguna/ubah.php");
             break;
             case 'tambah-karyawan':
                 $AuthUser->buatedit();
@@ -63,6 +104,7 @@ if(!isset($_GET['aksi'])){
         # Master Karyawan
 
         
+
         default:
         require_once("../../../../controller/controller.php");
             break;

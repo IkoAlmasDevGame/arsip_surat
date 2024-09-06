@@ -191,8 +191,8 @@
                                                 </div>
                                                 <div class="form-control mt-1">
                                                     <input type="file" name="foto" accept="image/*"
-                                                        class="form-control-file" required onchange="previewImage(this)"
-                                                        aria-required="true">
+                                                        onchange="this.fileInput" id="fileInput"
+                                                        class="form-control-file" required aria-required="true">
                                                 </div>
                                             </div>
                                         </div>
