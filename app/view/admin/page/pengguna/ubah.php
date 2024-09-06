@@ -13,6 +13,35 @@
                 die;
             }
         ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const password = document.getElementById('passwrd');
+            const repassword = document.getElementById('repasswrd');
+            const error = document.getElementById('error');
+            const success = document.getElementById('success');
+
+            function validatePasswords() {
+                if (password.value === repassword.value &&
+                    password.value !== '' && repassword.value !== '') {
+                    success.style.display = 'block';
+                    error.style.display = 'none';
+                } else {
+                    success.style.display = 'none';
+                    if (password.value === '' || repassword.value === '') {
+                        error.style.display = 'none';
+                    } else {
+                        error.style.display = 'block';
+                    }
+                }
+            }
+            // Menambahkan event listener untuk 'keyup' pada kedua input
+            password.addEventListener('keyup', validatePasswords);
+            repassword.addEventListener('keyup', validatePasswords);
+            // Opsional: Validasi saat input kehilangan fokus
+            password.addEventListener('blur', validatePasswords);
+            repassword.addEventListener('blur', validatePasswords);
+        });
+        </script>
     </head>
 
     <body>
@@ -101,34 +130,41 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group mt-1 mt-lg-1">
+                                    <div class="form-group mt-1">
                                         <div class="form-inline row justify-content-center
-                                             align-items-center flex-wrap">
+                                         align-items-center flex-wrap">
                                             <div class="form-label col-sm-4 col-md-4">
                                                 <label for="" class="label label-default fs-4
-                                                 display-5 text-light">Password</label>
+                                                 display-5 text-light">Kata
+                                                    Sandi</label>
                                             </div>
                                             <div class="col-sm-6 col-md-7">
-                                                <input type="password" name="password" maxlength="255"
-                                                    class="form-control"
-                                                    placeholder="masukkan password karyawan baru ..." required
-                                                    aria-required="TRUE" id="">
+                                                <input type="password" name="password" required aria-required="TRUE"
+                                                    placeholder="masukkan kata sandi baru ..." maxlength="255"
+                                                    class="form-control" id="passwrd">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group mt-1 mt-lg-1">
+                                    <div class="form-group mt-1">
                                         <div class="form-inline row justify-content-center
-                                             align-items-center flex-wrap">
+                                         align-items-center flex-wrap">
                                             <div class="form-label col-sm-4 col-md-4">
                                                 <label for="" class="label label-default fs-4
-                                                 display-5 text-light">Repassword</label>
+                                                 display-5 text-light">Ulangi Kata
+                                                    Sandi</label>
                                             </div>
                                             <div class="col-sm-6 col-md-7">
-                                                <input type="password" name="password" maxlength="255"
-                                                    class="form-control"
-                                                    placeholder="masukkan ulangi password karyawan baru ..." required
-                                                    aria-required="TRUE" id="">
+                                                <input type="password" name="password" required aria-required="TRUE"
+                                                    placeholder="ulangi kata sandi baru ..." maxlength="255"
+                                                    class="form-control" id="repasswrd">
                                             </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end align-items-end flex-wrap me-4 me-lg-5">
+                                            <p style="color: salmon; display: none;" id="error">
+                                                Password dan Repassword anda tidak cocok</p>
+                                            <p style="color: lightgreen; display: none;" id="success">
+                                                Password dan Repassword anda cocok
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="form-group mt-1 mt-lg-1">
@@ -164,9 +200,9 @@
                                                 <div class="form-icon img-thumbnail w-25">
                                                     <img <?php if($isi['foto']){ ?>
                                                         src="../../../../../assets/image/<?php echo $isi['foto']?>"
-                                                        <?php }else{ ?> src="../../../../assets/image/user_logo.png"
-                                                        <?php } ?> id="preview" alt="" width="64"
-                                                        class="img-rounded img-fluid">
+                                                        <?php }else{ ?>
+                                                        src="../../../../assets/image/profile/user_logo.png" <?php } ?>
+                                                        id="preview" alt="" width="64" class="img-rounded img-fluid">
                                                 </div>
                                                 <div class="form-control mt-1">
                                                     <input type="file" name="foto" accept="image/*" id="fileInput"
