@@ -67,15 +67,15 @@
                                         <th class="table-layout-2 text-center">No.</th>
                                         <th class="table-layout-2 text-center">Nama Karyawan</th>
                                         <th class="table-layout-2 text-center">Tanggal Sekarang</th>
-                                        <th class="table-layout-2 text-center">Jam Absensi Pagi</th>
-                                        <th class="table-layout-2 text-center">Jam Absensi Siang</th>
+                                        <th class="table-layout-2 text-center">Jam Absensi</th>
+                                        <th class="table-layout-2 text-center">Type Shift</th>
                                         <th class="table-layout-2 text-center">Status Absensi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
                                         $no = 1;
-                                        $sql = "SELECT * FROM absensi order by id_absensi asc";
+                                        $sql = "SELECT * FROM absensi left join shifts on absensi.shift_type = shifts.shift_type order by absensi.id_absensi asc";
                                         $data = $konfigs->query($sql);
                                         while($pro = $data->fetch_array()){
                                     ?>
@@ -84,25 +84,29 @@
                                         <td class="table-layout-2 text-center"><?php echo $pro['nama'] ?></td>
                                         <td class="table-layout-2 text-center"><?php echo $pro['tanggal_input'] ?></td>
                                         <td class="table-layout-2 text-center"><?php echo $pro['jam'] ?></td>
+                                        <td class="table-layout-2 text-center"><?php echo $pro['shift_type'] ?></td>
                                         <td class="table-layout-2 text-center">
                                             <?php 
-                                                $select_jam = $konfigs->query("SELECT * FROM jam_masuk inner join absensi on jam_masuk.jam_pagi = absensi.pagi_jam order by jam_pagi asc");
+                                                $select_jam = $konfigs->query("SELECT * FROM jam_masuk");
                                                 $jam_masuk = mysqli_fetch_array($select_jam);
-                                                if($pro['jam'] > $jam_masuk['jam_pagi']){
-                                                    echo "<b style='color: red;'>telat</b>";
-                                                }else{
-                                                    echo "<b style='color: green;'>tepat waktu</b>";                                                    
-                                                }
-                                            ?>
-                                        </td>
-                                        <td class="table-layout-2 text-center">
-                                            <?php 
-                                                $select_jam = $konfigs->query("SELECT * FROM jam_masuk inner join absensi on jam_masuk.jam_siang = absensi.siang_jam order by jam_siang asc");
-                                                $jam_masuk = mysqli_fetch_array($select_jam);
-                                                if($pro['jam'] > $jam_masuk['jam_siang']){
-                                                    echo "<b style='color: red;'>telat</b>";
-                                                }else{
-                                                    echo "<b style='color: green;'>tepat waktu</b>";                                                    
+                                                if($pro['shift_type'] == "pagi"){
+                                                    if($pro['jam'] > $jam_masuk['pagi']){
+                                                        echo "<b style='color:red;'>telat</b>";
+                                                    }else{
+                                                        echo "<b style='color:green;'>tepat waktu</b>";
+                                                    }
+                                                }else if($pro['shift_type'] == "siang"){
+                                                    if($pro['jam'] > $jam_masuk['siang']){
+                                                        echo "<b style='color:red;'>telat</b>";
+                                                    }else{
+                                                        echo "<b style='color:green;'>tepat waktu</b>";
+                                                    }
+                                                }else if($pro['shift_type'] == "malam"){
+                                                   if($pro['jam'] > $jam_masuk['malam']){
+                                                        echo "<b style='color:red;'>telat</b>";
+                                                    }else{
+                                                        echo "<b style='color:green;'>tepat waktu</b>";
+                                                    } 
                                                 }
                                             ?>
                                         </td>

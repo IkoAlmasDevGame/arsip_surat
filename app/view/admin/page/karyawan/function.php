@@ -5,7 +5,7 @@ if(isset($_GET['info'])){
 <div class="alert alert-success alert-dismissible fade show" role="alert">
     <strong>Informasi </strong>
     <p>anda berhasil menambahkan karyawan baru ...</p>
-    <button type="button" class="btn-close" onclick="location.href = '../ui/header.php?aksi=pendaftaran-karyawan'"
+    <button type="button" class="btn-close" onclick="location.href = '../ui/header.php?aksi=daftar-karyawan'"
         data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 <?php
@@ -24,7 +24,7 @@ if(isset($_GET['info'])){
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong>Informasi </strong>
     <p>anda gagal menambahkan karyawan baru ...</p>
-    <button type="button" class="btn-close" onclick="location.href = '../ui/header.php?aksi=pendaftaran-karyawan'"
+    <button type="button" class="btn-close" onclick="location.href = '../ui/header.php?aksi=daftar-karyawan'"
         data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 <?php        

@@ -192,24 +192,15 @@ if($_SESSION['role'] == "superadmin"){
             <hr>
             <h5 class="fw-normal fst-normal fs-6">Surat Masuk & Surat Keluar</h5>
             <li class="nav-item">
-                <a class="nav-link collapsed" aria-current="page" href="">
+                <a class="nav-link collapsed" aria-current="page" href="?page=suratmasuk">
                     <i class="bi bi-mailbox2 fa-1x"></i>
                     <span>Surat Masuk <?php # code count surat masuk ?></span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" aria-current="page" href="">
+                <a class="nav-link collapsed" aria-current="page" href="?page=suratkeluar">
                     <i class="bi bi-mailbox fa-1x"></i>
                     <span>Surat Keluar <?php # code count surat keluar ?></span>
-                </a>
-            </li>
-
-            <hr>
-            <h5 class="fw-normal fst-normal fs-6">Arsip Surat</h5>
-            <li class="nav-item">
-                <a class="nav-link collapsed" aria-current="page" href="">
-                    <i class="bi bi-mailbox-flag fa-1x"></i>
-                    <span>Arsip Surat</span>
                 </a>
             </li>
 
@@ -229,7 +220,7 @@ if($_SESSION['role'] == "superadmin"){
             </li>
 
             <hr>
-            <h5 class="fw-normal fst-normal fs-6">Profile & Pengaturan</h5>
+            <h5 class="fw-normal fst-normal fs-6">Profile</h5>
             <li class="nav-item">
                 <a class="nav-link collapsed" aria-current="page"
                     href="?aksi=ubah-karyawan&id=<?php echo $_SESSION['id']?>"
@@ -242,7 +233,8 @@ if($_SESSION['role'] == "superadmin"){
             <hr>
             <h5 class="fw-normal fst-normal fs-6">Keluar Website</h5>
             <li class="nav-item">
-                <a class="nav-link collapsed" aria-current="page" href="?page=keluar"
+                <a class="nav-link collapsed" aria-current="page"
+                    href="?page=keluar&nama=<?php echo $_SESSION['nama']?>"
                     onclick="return confirm('Apakah anda ingin logout ?')">
                     <i class="fa fa-sign-out-alt"></i>
                     <span>Logout</span>

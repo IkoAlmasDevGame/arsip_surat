@@ -1,6 +1,5 @@
 <?php 
 require_once("../../../../database/koneksi.php");
-$hasil = mysqli_fetch_array($konfigs->query("SELECT * FROM sistem WHERE status = '1' order by id_sistem asc"));
 /* Files Model & Files Controller */ 
 /* Files Model */
 require_once("../../../../model/karyawan.php");
@@ -11,14 +10,18 @@ require_once("../../../../model/keterangan.php");
 $keterangan = new model\keterangan($konfigs);
 require_once("../../../../model/arsip_surat.php");
 require_once("../../../../model/pengaturan.php");
+$pengaturan = new model\pengaturan($konfigs);
 require_once("../../../../model/pengguna.php");
 require_once("../../../../model/surat_masuk.php");
+$incomming = new model\incomingmail($konfigs);
 require_once("../../../../model/surat_keluar.php");
 /* Files Controller */
 require_once("../../../../controller/controller.php");
 $AuthUser = new controller\Authentication($konfigs);
 $attedance = new controller\attedance($konfigs);
 $document = new controller\document($konfigs);
+$setting = new controller\settings($konfigs);
+$mailin = new controller\mailincomming($konfigs);
 
 // Action & Page 
 if(!isset($_GET['page'])){
@@ -42,6 +45,16 @@ if(!isset($_GET['page'])){
             $title = "Data Master keterangan";
             require_once("../keterangan/keterangan.php");
             break;
+            
+        case 'suratmasuk':
+            $title = "Data Master surat masuk";
+            require_once("../surat_masuk/surat_masuk.php");
+            break;
+            
+        case 'suratkeluar':
+            $title = "Data Master surat keluar";
+            require_once("../surat_keluar/surat_keluar.php");
+            break;
 
         case 'settings':
             $title = "Data Master pengaturan";
@@ -49,7 +62,11 @@ if(!isset($_GET['page'])){
             break;
 
         case 'keluar':
-            if(isset($_SESSION['status'])){
+            $jam_pulang = date('H:i:s');
+            $name = $_SESSION['nama'];
+            $data = $config->prepare("UPDATE absensi SET jam2 = ? WHERE nama = ?");
+            $data->execute(array($jam_pulang, $name));
+            if(isset($_SESSION['status'])){                
                 unset($_SESSION['status']);
                 session_unset();
                 session_destroy();
@@ -67,7 +84,35 @@ if(!isset($_GET['page'])){
 
 if(!isset($_GET['aksi'])){
 }else{
-    switch ($_GET['aksi']) {  
+    switch ($_GET['aksi']) {
+        # Master Surat Masuk
+        case 'tambah-surat-masuk':
+            $title = "Tambah Surat Masuk";
+            $title2 = "Data Master surat masuk";
+            require_once("../surat_masuk/tambah.php");
+            break;
+        case 'ubah-surat-masuk':
+            $title = "Ubah Surat Masuk";
+            $title2 = "Data Master surat masuk";
+            require_once("../surat_masuk/ubah.php");
+            break;
+            case 'tambah-suratmasuk':
+                $mailin->buat();
+                break;
+            case 'ubah-suratmasuk':
+                $mailin->ubah();
+                break;
+            case 'hapus-suratmasuk':
+                # code...
+                break;
+        # Master Surat Masuk
+
+        # Master Pengaturan
+        case 'update-settings':
+            $setting->edit();
+            break;
+        # Master Pengaturan
+
         # Master Absensi
         case 'absensi-karyawan':
             require_once("../absensi/tambah.php");

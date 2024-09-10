@@ -95,6 +95,13 @@
                                                     <label for="" class="label label-default">Jam Absensi</label>
                                                 </div>
                                                 <div class="col-sm-6 col-md-7">
+                                                    <select name="shift_type" class="form-select mb-1 mb-lg-1" required
+                                                        id="" aria-required="TRUE">
+                                                        <option value="">Pilih Shift Pagi / Siang / Malam</option>
+                                                        <option value="pagi">pagi</option>
+                                                        <option value="siang">siang</option>
+                                                        <option value="malam">malam</option>
+                                                    </select>
                                                     <input type="text" name="jam" class="form-control" required readonly
                                                         aria-required="TRUE" value="<?php echo date('H:i:s')?>" id="">
                                                     <input type="hidden" name="jam2" class="form-control" required

@@ -8,6 +8,7 @@
         <?php 
             if($_SESSION['role'] == "superadmin"){
                 require_once("../ui/header.php");
+                require_once("../../../../database/koneksi.php");
             }else{
                 echo "<script>document.location.href = '../ui/header.php?page=beranda';</script>";
                 die;
@@ -16,22 +17,41 @@
         <script type="text/javascript">
         function fetchData() {
             $.ajax({
-                url: '../karyawan/get_data.php', // Ganti dengan path ke file PHP Anda
+                url: '../karyawan/get_karyawan.php', // Path ke skrip PHP Anda
                 method: 'GET',
-                dataType: 'json',
+                dataType: 'json', // Meminta data dalam format JSON
                 success: function(data) {
-                    $('#data-container').html(JSON.stringify(data, null, 2));
+                    var dataList = $('#dataList');
+                    dataList.empty(); // Kosongkan daftar sebelumnya
+
+                    if (Array.isArray(data)) {
+                        $.each(data, function(index, item) {
+                            var listItem = $('<li></li>').html(JSON.stringify(data, {
+                                'id_akun': item.id_akun,
+                                'username': item.username,
+                                'email': item.email,
+                                'password': item.password,
+                                'repassword': item.repassword,
+                                'role': item.role,
+                                'foto': item.foto
+                            }, 10));
+                            console.log(data);
+                            dataList.append(listItem);
+                        });
+                    } else {
+                        // Menampilkan pesan jika tidak ada data
+                        var listItem = $('<li></li>').text(data.message || 'Tidak ada data');
+                        dataList.append(listItem);
+                    }
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    $('#data-container').html('Error: ' + textStatus);
+                error: function(xhr, status, error) {
+                    console.error('Terjadi kesalahan:', error);
+                    var dataList = $('#dataList');
+                    dataList.empty();
+                    dataList.append('<li>Terjadi kesalahan saat mengambil data.</li>');
                 }
             });
         }
-
-        // Fetch data setiap 30 detik
-        setInterval(fetchData, 30000);
-        // Fetch data saat pertama kali halaman dimuat
-        fetchData();
         </script>
     </head>
 
@@ -73,7 +93,7 @@
                             <input type="search" name="cari" aria-controls="example2_filter" id="example1_filter"
                                 required>
                         </form>
-                        <div id="data-container" hidden></div>
+                        <ul id="dataList" hidden></ul>
                         <div class="d-table">
                             <table class="table-layout" id="example1">
                                 <thead>

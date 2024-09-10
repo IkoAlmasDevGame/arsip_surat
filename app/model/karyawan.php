@@ -17,7 +17,7 @@ class karyawan {
         $role = htmlentities($_POST['role']) ? htmlspecialchars($_POST['role']) : strip_tags($_POST['role']);
         # code ... Foto Karyawan
         $ekstensi_diperbolehkan_foto = array('png', 'jpg', 'jpeg', 'jfif', 'gif'); 
-        $photo_src = htmlentities($_FILES["foto"]["name"]) ? htmlspecialchars($_FILES["foto"]["name"]) : $_FILES["foto"]["name"];
+        $photo_src = htmlentities($_FILES["foto"]["name"]) ? htmlspecialchars($_FILES["foto"]["name"]) : "user_logo.png";
         $x_foto = explode('.', $photo_src);
         $ekstensi_photo_src = strtolower(end($x_foto));
         $ukuran_photo_src = $_FILES['foto']['size'];
@@ -132,14 +132,14 @@ class karyawan {
         }
 
         $table = "users";
-        $sql = "SELECT * FROM $table WHERE username = '$userInput' and password = '$password' || email = '$userInput' and password = '$password'";
+        $sql = "SELECT * FROM $table WHERE username= '$userInput'  and password='$password' || email = '$userInput' and password = '$password'";
         $data = $this->db->query($sql);
         $cek = mysqli_num_rows($data);
 
         if($cek > 0){
             $response = array($userInput, $password);
-            $response[$table] = array($userInput, $password);
-            if($row = mysqli_fetch_assoc($data)){
+            $response[$table] = $response;
+            if($row = $data->fetch_assoc()){
                 if($row['role'] == "superadmin"){
                     $_SESSION['status'] = true;
                     $_SERVER['HTTPS'] = "on";
@@ -164,7 +164,7 @@ class karyawan {
                     echo "<script>document.location.href = '../page/ui/header.php?page=beranda'</script>";
                 }
                 $_COOKIE['cookies'] = $userInput;
-                setcookie($response[$table], $row[$userInput], time() + (86400*30), "/");
+                setcookie($response[$table], $row, time() + (86400 * 30), "/");
                 array_push($response['users'], $row);
                 exit;
             }

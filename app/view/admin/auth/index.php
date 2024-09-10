@@ -12,7 +12,9 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <?php 
             require_once("../../../database/koneksi.php");
-            $hasil = mysqli_fetch_array($konfigs->query("SELECT * FROM sistem WHERE status = '1' order by id_sistem asc"));
+            $data = $config->prepare("SELECT * FROM sistem WHERE status = '1' order by id_sistem asc");
+            $data->execute();
+            $hasil = $data->fetchAll();
         ?>
     </head>
 
@@ -34,6 +36,7 @@
                         <?php 
                             require_once("../../../controller/controller.php");
                             require_once("../../../model/karyawan.php");
+
                             $authentication = new controller\Authentication($konfigs);
                             if(!isset($_GET['aksi'])){
                             }else{

@@ -186,13 +186,13 @@
                                             </div>
                                             <div class="col-sm-6 col-md-7">
                                                 <div class="form-icon img-thumbnail w-25">
-                                                    <img src="../../../../../assets/image/user_logo.png" id="preview"
-                                                        alt="" width="64" class="img-rounded img-fluid">
+                                                    <img src="../../../../../assets/image/profile/user_logo.png"
+                                                        id="preview" alt="" width="64" class="img-rounded img-fluid">
                                                 </div>
                                                 <div class="form-control mt-1">
                                                     <input type="file" name="foto" accept="image/*"
                                                         onchange="this.fileInput" id="fileInput"
-                                                        class="form-control-file" required aria-required="true">
+                                                        class="form-control-file" aria-required="true">
                                                 </div>
                                             </div>
                                         </div>

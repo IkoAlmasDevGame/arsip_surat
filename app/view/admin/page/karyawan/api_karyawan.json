@@ -1,1 +1,22 @@
-[]
+[
+    {
+        "id_akun": 2,
+        "username": "indahjkt48",
+        "email": "indahjkt48@mailing.com",
+        "nama": "indah cahya nabila",
+        "password": "b8b329e55e63d2a9ab9b856bb794988d",
+        "repassword": "b8b329e55e63d2a9ab9b856bb794988d",
+        "role": "admin",
+        "foto": "indah_cahya.jpg"
+    },
+    {
+        "id_akun": 3,
+        "username": "aurhel_alana",
+        "email": "aurheljkt@mailing.com",
+        "nama": "aurhel alana",
+        "password": "def99441381edc85fc0875a915c6f390",
+        "repassword": "def99441381edc85fc0875a915c6f390",
+        "role": "admin",
+        "foto": "user_logo.png"
+    }
+]

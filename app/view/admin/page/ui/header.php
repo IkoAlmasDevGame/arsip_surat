@@ -9,6 +9,9 @@
             require_once("../../configs/auth.php");
             require_once("../../../../config/config.php");
             require_once("../route/route.php");
+            
+            $hasil = $config->prepare("SELECT * FROM sistem WHERE status = '1' order by id_sistem asc");
+            $hasil->execute();
         ?>
         <title>Dashboard</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
