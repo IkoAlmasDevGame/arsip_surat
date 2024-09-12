@@ -32,8 +32,24 @@
                     </div>
                     <div class="card-body mt-1">
                         <?php require_once("../auth/function.php"); ?>
-                        <?php # code ... ?>
-                        <form action="" enctype="multipart/form-data" method="post">
+                        <?php
+                            require_once("../../controller/controller.php");
+                            require_once("../../model/pengguna.php");
+                            $authPengguna = new controller\penggunaAuth($konfigs);
+                            if(!isset($_GET['aksi'])){
+                            }else{
+                                switch ($_GET['aksi']) {
+                                    case 'signin':
+                                        $authPengguna->LogIn();
+                                        break;
+                                    
+                                    default:
+                                        require_once("../../controller/controller.php");
+                                        break;
+                                }
+                            }
+                        ?>
+                        <form action="?aksi=signin" enctype="multipart/form-data" method="post">
                             <div class="form-group">
                                 <div class="form-inline row justify-content-center
                                      align-items-center flex-wrap mb-1 mt-1">

@@ -61,6 +61,26 @@ class incomingmail {
             die;
         }
     }
+
+    public function open($id, $status){
+        $id = htmlentities($_POST['id']) ? htmlspecialchars($_POST['id']) : strip_tags($_POST['id']);
+        $status = htmlentities($_POST['status']) ? htmlspecialchars($_POST['status']) : strip_tags($_POST['status']);
+        $table = "surat_masuk";
+        $table2 = "surat_keluar";
+        $update = "UPDATE $table SET status = '$status' WHERE id = '$id'";
+        $updated = "UPDATE $table2 SET status = '$status' WHERE id = '$id'";
+        $dataMasuk = $this->db->query($update);
+        $dataKeluar = $this->db->query($updated);
+        if($dataMasuk != null && $dataKeluar != null){
+            if($dataMasuk && $dataKeluar){
+                echo "<script>document.location.href = '../ui/header.php?page=suratmasuk'</script>";
+                die;
+            }
+        }else{
+            echo "<script>document.location.href = '../ui/header.php?page=suratmasuk'</script>";
+            die;
+        }
+    }
     
     public function update($nomorsurat,$tanggal,$pengirim,$penerima,$perihal,$keterangan,$id){
         // Penginputan

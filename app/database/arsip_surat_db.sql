@@ -66,21 +66,6 @@ CREATE TABLE `jam_masuk` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notifikasi`
---
-
-CREATE TABLE `notifikasi` (
-  `id` int(11) NOT NULL,
-  `id_surat_masuk` int(11) DEFAULT NULL,
-  `id_surat_keluar` int(11) NOT NULL,
-  `jenis_surat` enum('masuk','keluar') NOT NULL,
-  `pesan` text DEFAULT NULL,
-  `status` enum('belum_dibaca','sudah_dibaca') DEFAULT 'belum_dibaca'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pengguna`
 --
 
@@ -159,6 +144,12 @@ CREATE TABLE `users` (
   `role` enum('superadmin','admin') NOT NULL,
   `foto` varchar(80) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `users` (`id_akun`, `username`, `email`, `nama`, `password`, `repassword`, `role`, `foto`) VALUES
+(1, 'superadmin', 'superadmin@mailing.com', 'super admin', '0192023a7bbd73250516f069df18b500', '0192023a7bbd73250516f069df18b500', 'superadmin', 'flora_shafiq.jpg'),
+(2, 'indahjkt48', 'indahjkt48@mailing.com', 'indah cahya nabila', 'b8b329e55e63d2a9ab9b856bb794988d', 'b8b329e55e63d2a9ab9b856bb794988d', 'admin', 'indah_cahya.jpg'),
+(3, 'aurhel_alana', 'aurheljkt@mailing.com', 'aurhel alana', 'def99441381edc85fc0875a915c6f390', 'def99441381edc85fc0875a915c6f390', 'admin', 'aurhel_alana.jpg');
+
 
 --
 -- Indexes for dumped tables

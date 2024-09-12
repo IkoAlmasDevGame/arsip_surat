@@ -1,5 +1,8 @@
 <?php 
 require_once("../../../../database/koneksi.php");
+$data = $konfigs->query("SELECT * FROM sistem WHERE status = '1' order by id_sistem asc") or mysqli_connect_errno();
+$hasil = mysqli_fetch_array($data) or mysqli_error($data);
+
 /* Files Model & Files Controller */ 
 /* Files Model */
 require_once("../../../../model/karyawan.php");

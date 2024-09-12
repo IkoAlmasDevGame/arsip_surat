@@ -25,8 +25,9 @@ if($_SESSION['role'] == "superadmin"){
                     <?php $baseFile = mysqli_fetch_array($konfigs->query("SELECT * FROM users WHERE email = '$_SESSION[email]'")); ?>
                     <img <?php if($_SESSION['foto']){?>
                         src="../../../../../assets/image/<?php echo $baseFile['foto']; ?>" <?php }else{?>
-                        src="../../../../../assets/image/profile/<?php echo $baseFile['foto']; ?>" <?php } ?> width="32"
-                        alt="<?php echo $_SESSION['nama']?>" class="rounded-3 img-circle img-responsive">
+                        src="../../../../../assets/image/profile/<?php echo $baseFile['foto']; ?>" <?php } ?>
+                        height="32" width="32" alt="<?php echo $_SESSION['nama']?>"
+                        class="rounded-3 img-circle img-responsive">
                     <span class="d-none d-md-block dropdown-toggle ps-2"></span>
                 </a><!-- End Profile Iamge Icon -->
 
@@ -154,7 +155,8 @@ if($_SESSION['role'] == "superadmin"){
                         <img <?php if($_SESSION['foto']){?>
                             src="../../../../../assets/image/<?php echo $baseFile['foto']; ?>" <?php }else{?>
                             src="../../../../../assets/image/profile/<?php echo $baseFile['foto']; ?>" <?php } ?>
-                            width="32" alt="<?php echo $_SESSION['nama']?>" class="rounded-3 img-circle img-responsive">
+                            width="32" height="32" alt="<?php echo $_SESSION['nama']?>"
+                            class="rounded-3 img-circle img-responsive">
                         <span class="d-none d-md-block dropdown-toggle ps-2"></span>
                     </a><!-- End Profile Iamge Icon -->
 

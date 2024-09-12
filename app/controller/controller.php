@@ -6,6 +6,8 @@ use model\absensi;
 use model\keterangan;
 use model\pengaturan;
 use model\incomingmail;
+use model\pengguna;
+use model\ArsipMailing;
 
 class Authentication {
     protected $konfigs;
@@ -142,6 +144,17 @@ class mailincomming {
         }
     }
 
+    public function buka(){
+        $id = htmlentities($_POST['id']) ? htmlspecialchars($_POST['id']) : strip_tags($_POST['id']);
+        $status = htmlentities($_POST['status']) ? htmlspecialchars($_POST['status']) : strip_tags($_POST['status']);
+        $data = $this->konfig->open($id, $status);
+        if($data === true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function ubah(){
         // Penginputan
         $nomorsurat = htmlentities($_POST['nomor_surat']) ? htmlspecialchars($_POST['nomor_surat']) : strip_tags($_POST['nomor_surat']);
@@ -163,6 +176,96 @@ class mailincomming {
         $id = htmlentities($_GET['id']) ? htmlspecialchars($_GET['id']) : strip_tags($_GET['id']);
         $data = $this->konfig->delete($id);
         if($data === true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+
+class penggunaAuth {
+    protected $konfig;
+    public function __construct($konfig)
+    {
+        $this->konfig = new pengguna($konfig);
+    }
+
+    public function LogIn(){
+        $userInput = htmlentities($_POST['userInput']) ? htmlspecialchars($_POST['userInput']) : strip_tags($_POST['userInput']);
+        $password = md5(htmlspecialchars($_POST['password']), false);
+        $data = $this->konfig->SignIn($userInput, $password);
+        if($data === true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public function buat(){
+        $username = htmlspecialchars($_POST['username']) ? htmlentities($_POST['username']) : strip_tags($_POST['username']);
+        $email = htmlspecialchars($_POST['email']) ? htmlentities($_POST['email']) : strip_tags($_POST['email']);
+        $nama = htmlspecialchars($_POST['nama']) ? htmlentities($_POST['nama']) : strip_tags($_POST['nama']);
+        $password = md5(htmlspecialchars($_POST['password']), false);
+        $repassword = md5(htmlspecialchars($_POST['password']), false);
+        
+        $data = $this->konfig->create($username, $email, $nama, $password, $repassword);
+        if($data === true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function ubah(){
+        $username = htmlspecialchars($_POST['username']) ? htmlentities($_POST['username']) : strip_tags($_POST['username']);
+        $email = htmlspecialchars($_POST['email']) ? htmlentities($_POST['email']) : strip_tags($_POST['email']);
+        $nama = htmlspecialchars($_POST['nama']) ? htmlentities($_POST['nama']) : strip_tags($_POST['nama']);
+        $password = md5(htmlspecialchars($_POST['password']), false);
+        $repassword = md5(htmlspecialchars($_POST['password']), false);
+
+        $data = $this->konfig->update($username, $email, $nama, $password, $repassword);
+        if($data === true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+}
+
+class Arsip {
+    protected $konfig;
+    public function __construct($konfig)
+    {
+        $this->konfig = new ArsipMailing($konfig);
+    }
+    
+    public function arsip_masuk(){
+        $nomorsurat = htmlentities($_POST['nomor_surat']) ? htmlspecialchars($_POST['nomor_surat']) : strip_tags($_POST['nomor_surat']);
+        $tanggal = htmlentities($_POST['tanggal']) ? htmlspecialchars($_POST['tanggal']) : strip_tags($_POST['tanggal']);
+        $jenis = "masuk";
+        $pengirim = htmlentities($_POST['pengirim']) ? htmlspecialchars($_POST['pengirim']) : strip_tags($_POST['pengirim']);
+        $penerima = htmlentities($_POST['penerima']) ? htmlspecialchars($_POST['penerima']) : strip_tags($_POST['penerima']);
+        $perihal = htmlentities($_POST['perihal']) ? htmlspecialchars($_POST['perihal']) : strip_tags($_POST['perihal']);
+        $keterangan = htmlentities($_POST['keterangan']) ? htmlspecialchars($_POST['keterangan']) : strip_tags($_POST['keterangan']);
+        $data = $this->konfig->create_masuk($nomorsurat,$tanggal,$jenis,$pengirim,$penerima,$perihal,$keterangan);
+        if($data == true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function arsip_keluar(){
+        $nomorsurat = htmlentities($_POST['nomor_surat']) ? htmlspecialchars($_POST['nomor_surat']) : strip_tags($_POST['nomor_surat']);
+        $tanggal = htmlentities($_POST['tanggal']) ? htmlspecialchars($_POST['tanggal']) : strip_tags($_POST['tanggal']);
+        $jenis = "masuk";
+        $pengirim = htmlentities($_POST['pengirim']) ? htmlspecialchars($_POST['pengirim']) : strip_tags($_POST['pengirim']);
+        $penerima = htmlentities($_POST['penerima']) ? htmlspecialchars($_POST['penerima']) : strip_tags($_POST['penerima']);
+        $perihal = htmlentities($_POST['perihal']) ? htmlspecialchars($_POST['perihal']) : strip_tags($_POST['perihal']);
+        $keterangan = htmlentities($_POST['keterangan']) ? htmlspecialchars($_POST['keterangan']) : strip_tags($_POST['keterangan']);
+        $data = $this->konfig->create_keluar($nomorsurat,$tanggal,$jenis,$pengirim,$penerima,$perihal,$keterangan);
+        if($data == true){
             return true;
         }else{
             return false;

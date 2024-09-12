@@ -1,6 +1,7 @@
 # Arsip Surat By IkoAlmasDevGame
 
 - Fitur Fitur Arsip Surat By IkoAlmasDevGame
+- Masih Beta Arsip Surat By IkoAlmasDevGame v1.0
 - Fitur - Fitur Arsip Surat : <br>
 <ol type="1">
     <ul>
