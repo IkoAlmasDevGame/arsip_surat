@@ -106,11 +106,13 @@
                                                 class="btn btn-sm rounded-2 btn-primary btn-outline-warning">
                                                 <i class="fa fa-edit fa-1x text-light"></i>
                                             </a>
-                                            <a href="" aria-current="page" class="btn btn-sm rounded-2 btn-danger"
+                                            <a href="?aksi=hapus-suratmasuk&id=<?php echo $isi['id']?>"
+                                                aria-current="page" class="btn btn-sm rounded-2 btn-danger"
                                                 onclick="return confirm('apakah surat masuk ini akan anda hapus ?')">
                                                 <i class="fa fa-trash-alt fa-1x text-light"></i>
                                             </a>
-                                            <a href="" aria-current="page" class="btn btn-sm rounded-2 btn-info"
+                                            <a href="?aksi=print-suratmasuk&id=<?php echo $isi['id']?>"
+                                                aria-current="page" class="btn btn-sm rounded-2 btn-info"
                                                 onclick="return confirm('apakah anda ingin print surat masuk ini ?')">
                                                 <i class="fa fa-print fa-1x text-light"></i>
                                             </a>

@@ -158,6 +158,16 @@ class mailincomming {
             return false;
         }
     }
+
+    public function hapus(){
+        $id = htmlentities($_GET['id']) ? htmlspecialchars($_GET['id']) : strip_tags($_GET['id']);
+        $data = $this->konfig->delete($id);
+        if($data === true){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 ?>

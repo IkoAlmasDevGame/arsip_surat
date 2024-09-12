@@ -42,6 +42,25 @@ class incomingmail {
             }
         }
     }
+
+    public function delete($id){
+        $id = htmlentities($_GET['id']) ? htmlspecialchars($_GET['id']) : strip_tags($_GET['id']);
+        $table = "surat_masuk";
+        $table2 = "surat_keluar";
+        $delete = "DELETE * FROM $table WHERE id = '$id'";
+        $delete2 = "DELETE * FROM $table2 WHERE id = '$id'";
+        $dataHapus = $this->db->query($delete2);
+        $data = $this->db->query($delete);
+        if($data != null && $dataHapus != null){
+            if($data && $dataHapus){
+                echo "<script>alert('surat ini sudah ter-hapus'); document.location.href = '../ui/header.php?page=suratmasuk'</script>";
+                die;
+            }
+        }else{
+            echo "<script>alert('surat ini gagal ter-hapus'); document.location.href = '../ui/header.php?page=suratmasuk'</script>";
+            die;
+        }
+    }
     
     public function update($nomorsurat,$tanggal,$pengirim,$penerima,$perihal,$keterangan,$id){
         // Penginputan

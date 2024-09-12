@@ -96,6 +96,9 @@ if(!isset($_GET['aksi'])){
             $title2 = "Data Master surat masuk";
             require_once("../surat_masuk/ubah.php");
             break;
+        case 'print-suratmasuk':
+            require_once("../surat_masuk/print.php");
+            break;
             case 'tambah-suratmasuk':
                 $mailin->buat();
                 break;
@@ -103,7 +106,7 @@ if(!isset($_GET['aksi'])){
                 $mailin->ubah();
                 break;
             case 'hapus-suratmasuk':
-                # code...
+                $mailin->hapus();
                 break;
         # Master Surat Masuk
 

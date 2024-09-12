@@ -106,8 +106,8 @@
                                                 </div>
                                                 <div class="col-sm-7 col-md-7">
                                                     <input type="text" name="pengirim"
-                                                        value="<?php echo $isi['pengirim']?>" readonly maxlength="255"
-                                                        required aria-required="TRUE" class="form-control"
+                                                        value="<?php echo $isi['pengirim']?>" maxlength="255" required
+                                                        aria-required="TRUE" class="form-control"
                                                         placeholder="masukkan pengirim surat ..." id="">
                                                 </div>
                                             </div>
@@ -121,8 +121,8 @@
                                                 </div>
                                                 <div class="col-sm-7 col-md-7">
                                                     <input type="text" name="penerima"
-                                                        value="<?php echo $isi['penerima']?>" readonly maxlength="255"
-                                                        required aria-required="TRUE" class="form-control"
+                                                        value="<?php echo $isi['penerima']?>" maxlength="255" required
+                                                        aria-required="TRUE" class="form-control"
                                                         placeholder="masukkan penerima surat ..." id="">
                                                 </div>
                                             </div>
